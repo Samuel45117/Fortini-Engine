@@ -1,0 +1,33 @@
+╔════════════════════════════════════════════════════════╗
+║                                                        ║
+║    🎮 FORTINI ENGINE - WINDOWS BUILD PACKAGE         ║
+║                                                        ║
+╚════════════════════════════════════════════════════════╝
+
+🚀 COMEÇAR AGORA:
+
+1. Requisitos:
+   ✓ Windows 10 ou Superior
+   ✓ Python 3.10+ (https://www.python.org/)
+   ✓ Marque "Add Python to PATH" na instalação do Python
+
+2. Compilar para EXE:
+   • Abra PowerShell/CMD nesta pasta
+   • Execute: build_exe_windows.bat
+   • Espere 3-5 minutos
+   • EXE estará em: dist\Fortini Editor\fortini_editor.exe
+
+3. Documentação:
+   • BUILD_EXE_README.md - Guia completo
+   • README.md - Sobre o projeto
+   • ARCHITECTURE.md - Arquitetura interna
+   • QUICKSTART.md - Quick start
+
+📁 Estrutura:
+   • fortini_engine/ - Código da engine
+   • launcher.py - Ponto de entrada
+   • build_windows_simple.spec - Config PyInstaller
+   • requirements.txt - Dependências
+
+✅ SUCESSO! Seu EXE será criado em minutos.
+

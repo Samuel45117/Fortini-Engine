@@ -1,0 +1,76 @@
+╔════════════════════════════════════════════════════════════╗
+║                                                            ║
+║    🎮 FORTINI ENGINE - WINDOWS COMPILATION PACKAGE       ║
+║       Pacote para compilação no Windows                   ║
+║                                                            ║
+╚════════════════════════════════════════════════════════════╝
+
+INSTRUÇÕES RÁPIDAS:
+
+1. Requisitos:
+   ✓ Windows 10 ou Superior
+   ✓ Python 3.10+ (https://www.python.org/)
+   ✓ Marque "Add Python to PATH" na instalação
+
+2. Compilar:
+   • Abra PowerShell/CMD nesta pasta
+   • Execute: build_exe_windows.bat
+   • Espere 3-5 minutos
+   • Pronto! EXE estará em: dist\Fortini Editor\
+
+3. Documentação:
+   • COMPILE_NO_WINDOWS.md - Guia passo-a-passo
+   • BUILD_EXE_README.md - Detalhes técnicos
+   • README.md - Visão geral do projeto
+   • ARCHITECTURE.md - Arquitetura da engine
+
+4. Arquivos Importantes:
+   • launcher.py - Ponto de entrada da aplicação
+   • build_windows_simple.spec - Configuração PyInstaller
+   • requirements.txt - Dependências Python
+   • fortini_engine/ - Código fonte da engine
+
+SUCESSO! 🚀
+EOF
+
+# Contar arquivos
+FILE_COUNT=$(find "$OUTPUT_DIR" -type f | wc -l)
+SIZE=$(du -sh "$OUTPUT_DIR" | cut -f1)
+
+echo "✅ Arquivos copiados: $FILE_COUNT"
+echo "📦 Tamanho total: $SIZE"
+echo ""
+
+# Criar ZIP
+echo "📦 Criando arquivo ZIP para download..."
+ZIP_NAME="Fortini-Engine-Windows-$(date +%Y%m%d).zip"
+zip -r -q "$ZIP_NAME" "$OUTPUT_DIR"
+
+echo "✅ Criado: $ZIP_NAME"
+ls -lh "$ZIP_NAME"
+
+echo ""
+echo "╔════════════════════════════════════════════════════════╗"
+echo "║                                                        ║"
+echo "║              ✅ PACOTE PRONTO PARA WINDOWS            ║"
+echo "║                                                        ║"
+echo "╚════════════════════════════════════════════════════════╝"
+echo ""
+echo "📁 Opção 1: Copie a pasta:"
+echo "   • $OUTPUT_DIR/"
+echo "   • Leve para Windows"
+echo "   • Execute: build_exe_windows.bat"
+echo ""
+echo "📦 Opção 2: Use o ZIP:"
+echo "   • $ZIP_NAME"
+echo "   • Descompacte no Windows"
+echo "   • Execute: build_exe_windows.bat"
+echo ""
+echo "Próximos passos no Windows:"
+echo "  1. Descompacte o arquivo ou copie a pasta"
+echo "  2. Abra PowerShell/CMD na pasta"
+echo "  3. Execute: build_exe_windows.bat"
+echo "  4. Seu EXE estará em: dist\\Fortini Editor\\fortini_editor.exe"
+echo ""
+echo "═══════════════════════════════════════════════════════════"
+echo ""
