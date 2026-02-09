@@ -1,6 +1,11 @@
 """Viewport Panel - 3D Scene View."""
 
-from PyQt6.QtWidgets import QOpenGLWidget, QVBoxLayout, QWidget
+try:
+    from PyQt6.QtOpenGLWidgets import QOpenGLWidget
+except Exception:
+    from PyQt6.QtWidgets import QOpenGLWidget
+
+from PyQt6.QtWidgets import QVBoxLayout, QWidget
 from PyQt6.QtCore import Qt, QTimer
 from OpenGL.GL import *
 from OpenGL.GLU import *
