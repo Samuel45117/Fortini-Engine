@@ -22,10 +22,33 @@ class ViewportPanel(QOpenGLWidget):
         self.last_pos = None
 
     def initializeGL(self) -> None:
-        """Initialize OpenGL."""
+        """Initialize OpenGL and create renderer if engine didn't create one."""
+        # Ensure we have a renderer attached to the engine now that a GL context exists
+        try:
+            from fortini_engine.core.engine import GameEngine
+            from fortini_engine.rendering.opengl_renderer import OpenGLRenderer
+        except Exception:
+            GameEngine = None
+            OpenGLRenderer = None
+
+        # Standard GL init for the widget
         glClearColor(0.1, 0.1, 0.1, 1.0)
         glEnable(GL_DEPTH_TEST)
         glEnable(GL_MULTISAMPLE)
+
+        # Create renderer now that context is current
+        if GameEngine is not None:
+            engine = GameEngine()
+            if getattr(engine, 'renderer', None) is None and OpenGLRenderer is not None:
+                try:
+                    engine.renderer = OpenGLRenderer(self.width(), self.height())
+                    engine.logger.info('Renderer created in Viewport.initializeGL')
+                except Exception as e:
+                    # Log but allow editor to continue — rendering will be disabled
+                    try:
+                        engine.logger.error(f'Failed to create OpenGLRenderer in viewport: {e}')
+                    except Exception:
+                        pass
 
     def resizeGL(self, w: int, h: int) -> None:
         """Handle resize."""

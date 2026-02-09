@@ -60,9 +60,8 @@ class OpenGLRenderer:
         self.height = height
         self.logger = Logger().get_logger(self.__class__.__name__)
 
-        # Initialize OpenGL
-        glEnable(GL_DEPTH_TEST)
-        glClearColor(0.1, 0.1, 0.1, 1.0)
+        # Don't call glEnable/glClearColor here — context might not be ready yet.
+        # ViewportPanel.initializeGL() will handle GL state setup.
 
         # Create default shader
         self.default_shader = self._create_default_shader()

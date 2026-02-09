@@ -24,8 +24,14 @@ class GameEngine:
     def __init__(self):
         self._initialized = False
 
-    def initialize(self, width: int = 1280, height: int = 720, title: str = "Fortini Engine"):
-        """Initialize the game engine."""
+    def initialize(self, width: int = 1280, height: int = 720, title: str = "Fortini Engine", create_display: bool = True, create_renderer: bool = True):
+        """Initialize the game engine.
+
+        If `create_display` is False we skip creating a pygame window (useful when the
+        engine is embedded in another GUI like Qt). If `create_renderer` is False we
+        defer OpenGL renderer creation until a GL context is available (e.g. in
+        QOpenGLWidget.initializeGL()).
+        """
         if self._initialized:
             return
 
@@ -44,13 +50,16 @@ class GameEngine:
         self.asset_manager = AssetManager()
         self.asset_manager.create_default_assets()
 
-        # Initialize Pygame
-        pygame.init()
-        pygame.display.set_mode((width, height))
-        pygame.display.set_caption(title)
+        # Optionally initialize Pygame display
+        self.renderer = None
+        if create_display:
+            pygame.init()
+            pygame.display.set_mode((width, height))
+            pygame.display.set_caption(title)
 
-        # Initialize renderer
-        self.renderer = OpenGLRenderer(width, height)
+        # Initialize renderer only if requested (and display was created)
+        if create_renderer and create_display:
+            self.renderer = OpenGLRenderer(width, height)
 
         # Create default scene
         self.current_scene = Scene("DefaultScene")

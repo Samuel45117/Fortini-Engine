@@ -101,8 +101,8 @@ class FortiniEditor(QMainWindow):
         self.engine = GameEngine()
         self.asset_manager = AssetManager()
 
-        # Initialize with editor resolution
-        self.engine.initialize(self.viewport.width(), self.viewport.height(), "Fortini Editor")
+        # Initialize engine for editor (don't create pygame display/renderer here)
+        self.engine.initialize(self.viewport.width(), self.viewport.height(), "Fortini Editor", create_display=False, create_renderer=False)
 
         # Create default objects
         cube = GameObject("Cube")
